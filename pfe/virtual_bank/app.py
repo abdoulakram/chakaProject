@@ -8,7 +8,7 @@ import string
 #import MySQLdb
 
 
-sessionid="lasttest4"#datetime.now().strftime("%d-%b-%Y-%H:%M:%S.%f") 
+sessionid="idsessiontest4"#datetime.now().strftime("%d-%b-%Y-%H:%M:%S.%f") 
 
 
 app = Flask(__name__)
