@@ -60,9 +60,8 @@ def sms_reply():
         chaine=""
         for i in range(len(liste)):
             chaine+=liste[i]+"\n"
-        #resp.message(str(chaine.replace("b'","")))
         if(str(chaine).__contains__("SECRET")):
-            resp.message(str(chaine.replace("b'","")+str("\nhttp://10.10.180.195:5000/?sessionid="+sessionid+"&phone="+phone_no)))
+            resp.message(str(chaine.replace("b'",""))+str("\nhttp://10.10.180.195:5000/?sessionid="+sessionid+"&phone="+phone_no))
             
         else:
             resp.message(str(chaine.replace("b'","")))
