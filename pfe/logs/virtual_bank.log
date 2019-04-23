@@ -1,0 +1,14 @@
+ * Serving Flask app "virtual_bank" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://10.10.180.195:5001/ (Press CTRL+C to quit)
+10.10.180.160 - - [19/Apr/2019 16:33:43] "GET /sms HTTP/1.1" 405 -
+ * Serving Flask app "virtual_bank" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://10.10.180.195:5001/ (Press CTRL+C to quit)
+10.10.180.160 - - [23/Apr/2019 09:31:17] "GET /sms HTTP/1.1" 405 -

@@ -8,10 +8,9 @@ from twilio.rest import Client
 from fonction import sms_reply
 
 
-
 app = Flask(__name__) 
 
-@app.route("/", methods=['GET','POST'])
+@app.route("/", methods=['GET'])
 def retrievePassWord():
     global phone
     wts='whatsapp:+'
@@ -22,6 +21,8 @@ def retrievePassWord():
         return render_template('password.html')
     else:
         return "hello"
+  
+    
 
 @app.route('/envoi', methods = ['GET', 'POST'])
 def envoi():
@@ -31,7 +32,7 @@ def envoi():
     auth_token = '75b6f0ce16d7b0b713aaf7d70a11605e'
     client = Client(account_sid, auth_token)
     
-    url = 'https://inputpass.chakamobile.com/?sessionid=idsessiontest4'
+    url = 'https://inputpass.chakamobile.com/?sessionid=lasttest4'
     parsed = urllib.parse.urlparse(url)
     idsession=urllib.parse.parse_qs(parsed.query)['sessionid'][0]
     resultat1=(str(sms_reply(password,idsession))).replace('<?xml version="1.0" encoding="UTF-8"?><Response><Message>',"")
@@ -42,7 +43,7 @@ def envoi():
                               to=phone
                                      )
     return redirect('https://wa.me/+14155238886')
-
 if __name__ == "__main__":
-    app.run(host='10.10.180.195', port= 5001, debug=False)
+    #app.run(debug =True)
+    app.run(host='10.10.180.195', port= 5000, debug=False)
   
