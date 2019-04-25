@@ -5,13 +5,23 @@ from urllib.request import Request, urlopen
 from datetime import datetime
 import random
 import string
+import mysql.connector
 #import MySQLdb
 
+mySQL_conn = mysql.connector.connect(host='localhost',
+                                   database='test',
+                                   user='root',
+                                   password='')
+cursor = mySQL_conn.cursor()
+args = [0,'','','776147852','2000']
+resultats=cursor.callproc('test_proc',args)
+sessionid=resultats[2]
 
-sessionid="idsessiontest4"#datetime.now().strftime("%d-%b-%Y-%H:%M:%S.%f") 
+#sessionid="idsessiontest4"#datetime.now().strftime("%d-%b-%Y-%H:%M:%S.%f") 
 
 
 app = Flask(__name__)
+
 
 @app.route("/sms", methods=['POST'])
 
@@ -64,7 +74,7 @@ def sms_reply():
             resp.message(str(chaine.replace("b'",""))+str("\nhttps://inputpass.chakamobile.com/?sessionid="+sessionid+"&phone="+phone_no))
             
         else:
-            resp.message(str(chaine.replace("b'","")))
+            resp.message(str(chaine.replace("b'",""))+str(sessionid))
         
         return str(resp)
   
