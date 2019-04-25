@@ -22,7 +22,6 @@ def sms_reply():
     phone_no = request.form.get('From')
     msg = request.form.get('Body')
     resp = MessagingResponse()
-    global sessionid
     mySQL_conn = mysql.connector.connect(host='localhost',
                                    database='session_id_bd',
                                    user='lakram',
