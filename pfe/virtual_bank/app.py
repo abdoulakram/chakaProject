@@ -9,12 +9,12 @@ import mysql.connector
 #import MySQLdb
 
 mySQL_conn = mysql.connector.connect(host='localhost',
-                                   database='test',
-                                   user='root',
-                                   password='')
+                                   database='session_id_db',
+                                   user='lakram',
+                                   password='passer')
 cursor = mySQL_conn.cursor()
 args = [0,'','','776147852','2000']
-resultats=cursor.callproc('test_proc',args)
+resultats=cursor.callproc('ps_getsessionid',args)
 sessionid=resultats[2]
 
 #sessionid="idsessiontest4"#datetime.now().strftime("%d-%b-%Y-%H:%M:%S.%f") 
