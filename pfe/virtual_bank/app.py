@@ -8,11 +8,7 @@ import string
 import mysql.connector
 #import MySQLdb
 
-mySQL_conn = mysql.connector.connect(host='localhost',
-                                   database='session_id_bd',
-                                   user='lakram',
-                                   password='passer')
-cursor = mySQL_conn.cursor()
+
 
 
 #sessionid="idsessiontest4"#datetime.now().strftime("%d-%b-%Y-%H:%M:%S.%f") 
@@ -20,25 +16,21 @@ cursor = mySQL_conn.cursor()
 
 app = Flask(__name__)
 
-
 @app.route("/sms", methods=['POST'])
 
-
-
 def sms_reply():
-    
-    
     phone_no = request.form.get('From')
     msg = request.form.get('Body')
     resp = MessagingResponse()
-    
-#    global sessionid
+    global sessionid
+    mySQL_conn = mysql.connector.connect(host='localhost',
+                                   database='session_id_bd',
+                                   user='lakram',
+                                   password='passer')
+    cursor = mySQL_conn.cursor()
     args = [0,'','',phone_no,msg]
     resultats=cursor.callproc('ps_getsessionid',args)
     sessionid=resultats[2]
-    
-    
-    
    
     headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
                       'AppleWebKit/537.11 (KHTML, like Gecko) '
