@@ -33,7 +33,7 @@ def sms_reply():
     resp = MessagingResponse()
     
 #    global sessionid
-    args = [0,'','','776147852','2000']
+    args = [0,'','',phone_no,msg]
     resultats=cursor.callproc('ps_getsessionid',args)
     sessionid=resultats[2]
     
