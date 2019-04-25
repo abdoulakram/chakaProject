@@ -9,7 +9,7 @@ import mysql.connector
 #import MySQLdb
 
 mySQL_conn = mysql.connector.connect(host='localhost',
-                                   database='session_id_db',
+                                   database='session_id_bd',
                                    user='lakram',
                                    password='passer')
 cursor = mySQL_conn.cursor()
