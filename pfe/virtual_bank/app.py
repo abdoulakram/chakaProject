@@ -19,7 +19,7 @@ app = Flask(__name__)
 @app.route("/sms", methods=['POST'])
 
 def sms_reply():
-    global sessionid
+    #global sessionid
     phone_no = request.form.get('From')
     msg = request.form.get('Body')
     resp = MessagingResponse()
@@ -31,7 +31,10 @@ def sms_reply():
     args = [0,'','',phone_no,msg]
     resultats=cursor.callproc('ps_getsessionid',args)
     sessionid=resultats[2]
+    mySQL_conn.commit()
+    cursor.close()
     
+    mySQL_conn.close()
     
     headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
                       'AppleWebKit/537.11 (KHTML, like Gecko) '
@@ -71,10 +74,7 @@ def sms_reply():
             resp.message(str(chaine.replace("b'",""))+str(sessionid))
         
         return str(resp)
-    mySQL_conn.commit()
-    cursor.close()
-    
-    mySQL_conn.close()
+   
 
 if __name__ == "__main__":
     app.run(host='10.10.180.195', port= 5001, debug=False)
