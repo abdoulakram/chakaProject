@@ -21,6 +21,7 @@ app = Flask(__name__)
 def sms_reply():
     #global sessionid
     phone_no = request.form.get('From')
+    num=str(phone_no[10:])
     msg = request.form.get('Body')
     resp = MessagingResponse()
     mySQL_conn = mysql.connector.connect(host='localhost',
@@ -28,7 +29,7 @@ def sms_reply():
                                    user='lakram',
                                    password='passer')
     cursor = mySQL_conn.cursor()
-    args = [0,'','',phone_no,msg]
+    args = [0,'','',num,msg]
     resultats=cursor.callproc('ps_getsessionid',args)
     sessionid=resultats[2]
     mySQL_conn.commit()
@@ -71,7 +72,7 @@ def sms_reply():
             resp.message(str(chaine.replace("b'",""))+str("\nhttps://inputpass.chakamobile.com/?sessionid="+sessionid+"&phone="+phone_no))
             
         else:
-            resp.message(str(chaine.replace("b'",""))+str(sessionid))
+            resp.message(str(chaine.replace("b'","")))
         
         return str(resp)
    
