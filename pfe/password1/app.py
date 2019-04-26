@@ -13,6 +13,7 @@ app = Flask(__name__)
 @app.route("/", methods=['GET'])
 def retrievePassWord():
     global phone
+    global sess
     wts='whatsapp:+'
     num=str(request.args.get('phone')[10:])
     phone=wts+num 
@@ -32,7 +33,7 @@ def envoi():
     auth_token = '9d3b3368116db94b5ff565012ef31ac4'
     client = Client(account_sid, auth_token)
     
-    url = 'https://inputpass.chakamobile.com/?sessionid=idsessiontest4'
+    url = 'https://inputpass.chakamobile.com/?sessionid='+sess
     parsed = urllib.parse.urlparse(url)
     idsession=urllib.parse.parse_qs(parsed.query)['sessionid'][0]
     resultat1=(str(sms_reply(password,idsession))).replace('<?xml version="1.0" encoding="UTF-8"?><Response><Message>',"")
