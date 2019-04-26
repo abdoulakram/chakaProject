@@ -18,7 +18,7 @@ def retrievePassWord():
     num=str(request.args.get('phone')[10:])
     phone=wts+num 
     sess=request.args.get('sessionid')
-    if sess=="idsessiontest4": 
+    if sess!="idsessiontest4": 
         return render_template('password.html')
     else:
         return "hello"
