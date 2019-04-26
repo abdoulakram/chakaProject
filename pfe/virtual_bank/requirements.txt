@@ -16,4 +16,4 @@ twilio==6.25.2
 urllib3==1.24.1
 Werkzeug==0.15.1
 mysql-connector-python==8.0.16
-flask_mysqldb==1.1.1
+flask_mysqldb==0.2.0

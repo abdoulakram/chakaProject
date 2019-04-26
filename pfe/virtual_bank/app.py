@@ -6,7 +6,6 @@ from datetime import datetime
 import random
 import string
 import mysql.connector
-from flask_mysqldb import MySQL
 #import MySQLdb
 
 
@@ -17,13 +16,6 @@ from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'lakram'
-app.config['MYSQL_PASSWORD'] = 'passer'
-app.config['MYSQL_DB'] = 'session_id_bd'
-mysql = MySQL(app)
-
-
 @app.route("/sms", methods=['POST'])
 
 def sms_reply():
@@ -31,12 +23,14 @@ def sms_reply():
     phone_no = request.form.get('From')
     msg = request.form.get('Body')
     resp = MessagingResponse()
-    cursor = mysql.connection.cursor()
-    
+    mySQL_conn = mysql.connector.connect(host='localhost',
+                                   database='session_id_bd',
+                                   user='lakram',
+                                   password='passer')
+    cursor = mySQL_conn.cursor()
     args = [0,'','',phone_no,msg]
     resultats=cursor.callproc('ps_getsessionid',args)
     sessionid=resultats[2]
-    cursor.close()
     
     headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
                       'AppleWebKit/537.11 (KHTML, like Gecko) '
