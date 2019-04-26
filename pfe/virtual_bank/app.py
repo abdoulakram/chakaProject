@@ -31,8 +31,10 @@ def sms_reply():
     args = [0,'','',phone_no,msg]
     resultats=cursor.callproc('ps_getsessionid',args)
     sessionid=resultats[2]
-    mySQL_conn.commit()
+    #mySQL_conn.commit()
+    cursor.close()
     
+    mySQL_conn.close()
     
     headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
                       'AppleWebKit/537.11 (KHTML, like Gecko) '
