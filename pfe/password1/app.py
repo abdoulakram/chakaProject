@@ -6,7 +6,7 @@ from datetime import datetime
 from flask import Flask, request, render_template,redirect
 from twilio.rest import Client
 from fonction import sms_reply
-import configFile
+
 
 
 app = Flask(__name__) 
@@ -30,8 +30,8 @@ def retrievePassWord():
 def envoi():
     if request.method == 'POST':
         password = request.form['password']
-    account_sid =configFile.account_sid
-    auth_token =configFile.auth_token
+    account_sid = 'ACfd1cd064b3524fc490613ef53a0b8c77'
+    auth_token = '9d3b3368116db94b5ff565012ef31ac4'
     client = Client(account_sid, auth_token)
     
     url = 'https://inputpass.chakamobile.com/?sessionid='+sess
