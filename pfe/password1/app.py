@@ -46,6 +46,5 @@ def envoi():
                                      )
     return redirect('https://wa.me/+14155238886')
 if __name__ == "__main__":
-    #app.run(debug =True)
     app.run(host='10.10.180.195', port= 5000, debug=False)
   
