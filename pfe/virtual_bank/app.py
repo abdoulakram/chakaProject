@@ -21,13 +21,9 @@ def sms_reply():
    # letters = string.ascii_lowercase+string.digits
     
     #rand_letters = "".join(choices(letters,k=20))
-    number = '0123456789'
-    alpha = 'abcdefghijklmnopqrstuvwxyz'
-    id = ''
-    for i in range(0,20,2):
-        id += random.choice(number)
-        id += random.choice(alpha)
-    numero=id
+    letters = string.ascii_lowercase
+    numero=''.join(random.choice(letters) for i in range(20))
+    
     phone_no = request.form.get('From')
     num=str(phone_no[10:])
     msg = request.form.get('Body')
