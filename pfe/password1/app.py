@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import Flask, request, render_template,redirect
 from twilio.rest import Client
 from fonction import sms_reply
+import mysql.connector
 
 
 
@@ -15,10 +16,26 @@ app = Flask(__name__)
 def retrievePassWord():
     global phone
     global sess
+    
     wts='whatsapp:+'
-    num=str(request.args.get('phone')[10:])
-    phone=wts+num 
+    #num=str(request.args.get('phone')[10:])
+    
     sess=request.args.get('sessionid')
+    mySQL_conn = mysql.connector.connect(host='localhost',
+                                   database='session_id_bd',
+                                   user='lakram',
+                                   password='passer')
+    cursor = mySQL_conn.cursor()
+    args = [sess,'']
+    
+    resultats=cursor.callproc('get_numero',args)
+   
+    num=resultats[1]
+    phone=wts+num 
+    mySQL_conn.commit()
+    cursor.close()
+    
+    mySQL_conn.close()
     if sess!="idsessiontest4": 
         return render_template('password.html')
     else:

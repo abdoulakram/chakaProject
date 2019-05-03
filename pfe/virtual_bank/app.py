@@ -21,8 +21,7 @@ def sms_reply():
    # letters = string.ascii_lowercase+string.digits
     
     #rand_letters = "".join(choices(letters,k=20))
-    letters = string.ascii_lowercase
-    numero=''.join(random.choice(letters) for i in range(20))
+    
     
     phone_no = request.form.get('From')
     num=str(phone_no[10:])
@@ -38,9 +37,6 @@ def sms_reply():
     resultats=cursor.callproc('ps_getsessionid',args)
    
     sessionid=resultats[2]
-    args2=[sessionid,'',numero]
-    resultat2=cursor.callproc('random_val',args2)
-    random=resultat2[1]
     mySQL_conn.commit()
     cursor.close()
     
@@ -78,7 +74,7 @@ def sms_reply():
         for i in range(len(liste)):
             chaine+=liste[i]+"\n"
         if(str(chaine).__contains__("SECRET")):
-            resp.message(str(chaine.replace("b'",""))+str("\nhttps://inputpass.chakamobile.com/?sessionid="+str(random)+"&phone="+phone_no))
+            resp.message(str(chaine.replace("b'",""))+str("\nhttps://inputpass.chakamobile.com/?sessionid="+str(sessionid)))
             
         else:
             resp.message(str(chaine.replace("b'","")))
