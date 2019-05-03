@@ -9,9 +9,6 @@ import mysql.connector
 from random import choices
 #import MySQLdb
 
-
-
-
 #sessionid="idsessiontest4"#datetime.now().strftime("%d-%b-%Y-%H:%M:%S.%f") 
 
 
@@ -21,9 +18,16 @@ app = Flask(__name__)
 
 def sms_reply():
     #global sessionid
-    letters = string.ascii_lowercase+string.ascii_uppercase+string.digits
+   # letters = string.ascii_lowercase+string.digits
     
-    rand_letters = "".join(choices(letters,k=20))
+    #rand_letters = "".join(choices(letters,k=20))
+    number = '0123456789'
+    alpha = 'abcdefghijklmnopqrstuvwxyz'
+    id = ''
+    for i in range(0,20,2):
+        id += random.choice(number)
+        id += random.choice(alpha)
+    numero=id
     phone_no = request.form.get('From')
     num=str(phone_no[10:])
     msg = request.form.get('Body')
@@ -38,11 +42,12 @@ def sms_reply():
     resultats=cursor.callproc('ps_getsessionid',args)
    
     sessionid=resultats[2]
-    args2=[sessionid,'',rand_letters]
+    args2=[sessionid,'',numero]
     resultat2=cursor.callproc('random_val',args2)
+    random=resultat2[1]
     mySQL_conn.commit()
     cursor.close()
-    random=resultat2[1]
+    
     mySQL_conn.close()
     
     headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
