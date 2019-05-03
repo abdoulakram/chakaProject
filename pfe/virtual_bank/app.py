@@ -6,7 +6,7 @@ from datetime import datetime
 import random
 import string
 import mysql.connector
-from random import choices
+
 #import MySQLdb
 
 #sessionid="idsessiontest4"#datetime.now().strftime("%d-%b-%Y-%H:%M:%S.%f") 
