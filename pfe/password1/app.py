@@ -27,17 +27,20 @@ def retrievePassWord():
                                    password='passer')
     cursor = mySQL_conn.cursor()
     args = [sess,'']
+    args2=[sess,0]
     resultats=cursor.callproc('get_numero',args)
+    resultats2=cursor.callproc('verify_id',args2)
+    val=resultats2[1]
     num=resultats[1]
     mySQL_conn.commit()
     phone=wts+str(num) 
     
     cursor.close()
     mySQL_conn.close()
-    if sess!="idsessiontest4": 
+    if val==1: 
         return render_template('password.html')
     else:
-        return "hello"
+        return "Session doesn't exist"
   
     
 
