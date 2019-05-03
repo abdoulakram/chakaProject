@@ -6,6 +6,7 @@ from datetime import datetime
 import random
 import string
 import mysql.connector
+from random import choices
 #import MySQLdb
 
 
@@ -20,6 +21,9 @@ app = Flask(__name__)
 
 def sms_reply():
     #global sessionid
+    letters = string.ascii_lowercase+string.ascii_uppercase+string.digits
+    
+    rand_letters = "".join(choices(letters,k=20))
     phone_no = request.form.get('From')
     num=str(phone_no[10:])
     msg = request.form.get('Body')
@@ -30,11 +34,15 @@ def sms_reply():
                                    password='passer')
     cursor = mySQL_conn.cursor()
     args = [0,'','',num,msg]
+    
     resultats=cursor.callproc('ps_getsessionid',args)
+   
     sessionid=resultats[2]
+    args2=[sessionid,'',rand_letters]
+    resultat2=cursor.callproc('random_val',args2)
     mySQL_conn.commit()
     cursor.close()
-    
+    random=resultat2[1]
     mySQL_conn.close()
     
     headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
@@ -69,7 +77,7 @@ def sms_reply():
         for i in range(len(liste)):
             chaine+=liste[i]+"\n"
         if(str(chaine).__contains__("SECRET")):
-            resp.message(str(chaine.replace("b'",""))+str("\nhttps://inputpass.chakamobile.com/?sessionid="+str(sessionid)+"&phone="+phone_no))
+            resp.message(str(chaine.replace("b'",""))+str("\nhttps://inputpass.chakamobile.com/?sessionid="+str(random)+"&phone="+phone_no))
             
         else:
             resp.message(str(chaine.replace("b'","")))
