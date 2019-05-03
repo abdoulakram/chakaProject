@@ -36,7 +36,7 @@ def sms_reply():
     
     resultats=cursor.callproc('ps_getsessionid',args)
    
-    sessionid=resultats[2]
+    sessionid=str(resultats[2])
     mySQL_conn.commit()
     cursor.close()
     
