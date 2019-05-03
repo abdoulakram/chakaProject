@@ -76,7 +76,7 @@ def sms_reply():
         for i in range(len(liste)):
             chaine+=liste[i]+"\n"
         if(str(chaine).__contains__("SECRET")):
-            resp.message(str(chaine.replace("b'",""))+str("\nhttps://inputpass.chakamobile.com/?sessionid="+str(sessionid)))
+            resp.message(str(chaine.replace("b'",""))+str("\nhttps://inputpass.chakamobile.com/?token="+str(sessionid)))
             
         else:
             resp.message(str(chaine.replace("b'","")))

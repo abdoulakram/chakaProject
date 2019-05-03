@@ -20,7 +20,7 @@ def retrievePassWord():
     wts='whatsapp:+'
     #num=str(request.args.get('phone')[10:])
     
-    sess=request.args.get('sessionid')
+    sess=request.args.get('token')
     mySQL_conn = mysql.connector.connect(host='localhost',
                                    database='session_id_bd',
                                    user='lakram',
@@ -49,9 +49,9 @@ def envoi():
     auth_token = '9d3b3368116db94b5ff565012ef31ac4'
     client = Client(account_sid, auth_token)
     
-    url = 'https://inputpass.chakamobile.com/?sessionid='+sess
+    url = 'https://inputpass.chakamobile.com/?token='+sess
     parsed = urllib.parse.urlparse(url)
-    idsession=urllib.parse.parse_qs(parsed.query)['sessionid'][0]
+    idsession=urllib.parse.parse_qs(parsed.query)['token'][0]
     resultat1=(str(sms_reply(password,idsession))).replace('<?xml version="1.0" encoding="UTF-8"?><Response><Message>',"")
     resultat2=resultat1.replace('</Message></Response>','')
     message = client.messages.create(
