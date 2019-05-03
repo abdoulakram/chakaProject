@@ -40,7 +40,7 @@ def retrievePassWord():
     if val==1: 
         return render_template('password.html')
     else:
-        return "Session doesn't exist"
+        return render_template('sessionNotfound.html')
   
     
 
