@@ -28,9 +28,9 @@ def retrievePassWord():
     cursor = mySQL_conn.cursor()
     args = [sess,'']
     resultats=cursor.callproc('get_numero',args)
-    num=str(resultats[1])
+    num=resultats[1]
     mySQL_conn.commit()
-    phone=wts+num 
+    phone=wts+str(num) 
     
     cursor.close()
     mySQL_conn.close()
