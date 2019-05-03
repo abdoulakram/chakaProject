@@ -37,6 +37,8 @@ def sms_reply():
     resultats=cursor.callproc('ps_getsessionid',args)
    
     sessionid=str(resultats[2])
+    if len(sessionid)==23:
+        sessionid='0'+sessionid
     mySQL_conn.commit()
     cursor.close()
     
@@ -61,8 +63,7 @@ def sms_reply():
     query_string=urllib.parse.urlencode(params)
     data=query_string.encode("ascii")
     with urllib.request.urlopen(url=req,data=data) as response:
-        if len(sessionid)==23:
-            sessionid='0'+sessionid
+        
         response_text=response.read()
        # header=response.headers  
    
