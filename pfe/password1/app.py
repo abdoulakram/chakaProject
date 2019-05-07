@@ -48,8 +48,8 @@ def retrievePassWord():
 def envoi():
     if request.method == 'POST':
         password = request.form['password']
-    account_sid = 'ACfd1cd064b3524fc490613ef53a0b8c77'
-    auth_token = '9d3b3368116db94b5ff565012ef31ac4'
+    account_sid = 'AC5d3778a158ae3b60e351e561eaca7b72' #'ACfd1cd064b3524fc490613ef53a0b8c77'
+    auth_token = '4107090b7ffe339308d02cabae5e1a12' #'9d3b3368116db94b5ff565012ef31ac4'
     client = Client(account_sid, auth_token)
     
     url = 'https://inputpass.chakamobile.com/?token='+sess
